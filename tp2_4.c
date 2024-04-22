@@ -43,7 +43,24 @@ void listarPcMasVieja(Compu arreglo[], int tama){
     printf("Anio: %d \n", arreglo[indice].anio);
     printf("---------------\n");
 }
-
+void listarPcMasRapida(Compu arreglo[], int tama);
+void listarPcMasRapida(Compu arreglo[], int tama){
+    //guardo en aux el anio de la primer pc del arreglo
+    int aux = arreglo[0].velocidad, indice = 0;
+    for (int i = 0; i < tama; i++)
+    {
+        if(arreglo[i].velocidad > aux){
+            aux = arreglo[i].anio;
+            indice = i;
+        }
+    }
+    printf("--Listar pc mas rapida\n");
+    printf("Procesador: %s \n", arreglo[indice].tipo_cpu);
+    printf("Velocidad: %d Ghz\n", arreglo[indice].velocidad);
+    printf("Nucleos: %d \n", arreglo[indice].cantidad);
+    printf("Anio: %d \n", arreglo[indice].anio);
+    printf("---------------\n");
+}
 int main(){
     srand(time(NULL));
     //declaro el arreglo con 5 lugares
@@ -65,6 +82,7 @@ int main(){
 
     listarPc(computadoras, 5);
     listarPcMasVieja(computadoras, 5);
+    listarPcMasRapida(computadoras, 5);
     
     return 0;
 }
