@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
 typedef struct{
 int velocidad;//entre 1 y 3 GHz
@@ -11,7 +12,22 @@ char *tipo_cpu; //valores del arreglo tipos
 
 char tipos[6][10]={"Intel", "AMD", "Celeron", "Athlon", "Core", "Pentium"};
 
+void listarPc(Compu arreglo[], int tama);
+void listarPc(Compu arreglo[], int tama){
+    for (int i = 0; i < tama; i++)
+    {
+        printf("Procesador: %s \n", arreglo[i].tipo_cpu);
+        printf("Velocidad: %d \n", arreglo[i].velocidad);
+        printf("Nucleos: %d \n", arreglo[i].cantidad);
+        printf("Anio: %d \n", arreglo[i].anio);
+        printf("---------------\n");
+    }
+    
+}
+
 int main(){
+    srand(time(NULL));
+    //declaro el arreglo con 5 lugares
     Compu computadoras[5];
 
     //carga de datos aleatorios para el arreglo de pc
@@ -19,7 +35,7 @@ int main(){
     {
         //genero los numeros random y los guardo donde van
         computadoras[i].velocidad = 1 + rand() % 3;
-        computadoras[i].anio = 2015 + rand() % 2024;
+        computadoras[i].anio = rand() % 10 + 2015;
         computadoras[i].cantidad = 1 + rand() % 8;
         //para cargar el nombre del procesador, primero doy el tamaño del elemento del arreglo al puntero de la estrucura donde
         //se va a guardar ese nombre, sumandole 1 para el caracter de fin de cadena \0
@@ -27,6 +43,8 @@ int main(){
         //ahora copio el nombre del procesador en el puntero, uso la funcion strcpy(cadena_destino, cadena_origen);
         strcpy(computadoras[i].tipo_cpu, tipos[i]);
     }
+
+    listarPc(computadoras, 5);
     
     return 0;
 }
